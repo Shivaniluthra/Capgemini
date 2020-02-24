@@ -1,0 +1,22 @@
+SQL> select round(max(staff_sal)) as Highest, round(min(staff_sal)) as Lowest, round(sum(staff_sal)) as Total, round(avg(staff_sal)) as Average from staff_master;
+
+   HIGHEST     LOWEST      TOTAL    AVERAGE
+---------- ---------- ---------- ----------
+     87220      12500     307927      43990
+
+SQL> select dept_code ,count(*) as Total_number_of_managers from staff_master group by dept_code;
+
+ DEPT_CODE TOTAL_NUMBER_OF_MANAGERS
+---------- ------------------------
+         1                        1
+         2                        3
+         4                        2
+         5                        1
+
+SQL> select dept_code, sum(staff_sal) as Sum from Staff_Master where mgr_code is not null group by dept_code having sum(staff_sal)>20000;
+
+ DEPT_CODE        SUM
+---------- ----------
+         1   87220.17
+         2  114686.22
+         4   80930.21

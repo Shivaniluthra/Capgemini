@@ -1,0 +1,65 @@
+SQL> select design_code, staff_name from Staff_Master where hiredate<'01-JAN-03' and staff_sal between 12000 and 25000;
+
+DESIGN_CODE STAFF_NAME
+----------- --------------------------------------------------
+          3 ruchika
+          2 riya
+
+
+SQL> select  staff_code, staff_name, dept_code from Staff_Master where (extract(year from sysdate)- extract(year from hiredate))>=18 order by (extract(year from sysdate)- extract(year from hiredate));
+
+STAFF_CODE STAFF_NAME                                          DEPT_CODE
+---------- -------------------------------------------------- ----------
+      1007 riya                                                        2
+      1006 ruchika                                                     4
+
+SQL> select * from Staff_Master where mgr_code is null;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1007 riya                                                         2
+         2 15-JAN-99 16-JUL-89
+gurugram
+                12590
+
+SQL> select * from book_master where book_pub_year between 2001 and 2004;
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1116 c&java                                                      2003
+ramanujan
+
+      1115 java                                                        2001
+nandu
+
+SQL> select * from book_master where book_name like '%&%';
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1116 c&java                                                      2003
+ramanujan
+
+SQL> select * from staff_master where staff_name like '%!_%' escape '!';
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1008 dhriti_rao                                                   4
+         5 20-MAY-96 20-JUL-92
+gurugram
+                12500

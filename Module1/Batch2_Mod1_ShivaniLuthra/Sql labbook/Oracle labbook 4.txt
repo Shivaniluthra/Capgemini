@@ -1,0 +1,355 @@
+﻿
+SQL> CREATE TABLE CUSTOMER
+  2  (CUSTOMERID NUMBER(5),
+  3  CUST_NAME VARCHAR2(20),
+  4  ADDRESS1 VARCHAR2(30),
+  5  ADDRESS2 VARCHAR2(30)
+  6  );
+
+Table created.
+
+SQL> ALTER TABLE CUSTOMER
+  2  MODIFY CUST_NAME
+  3  VARCHAR2(30)
+  4  ;
+
+Table altered.
+
+SQL> DESC CUSTOMER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ CUST_NAME                                          VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+
+SQL> ALTER TABLE CUSTOMER
+  2  RENAME COLUMN CUST_NAME TO CUSTOMERNAME
+  3  ;
+
+Table altered.
+
+SQL> ALTER TABLE CUSTOMER
+  2  MODIFY CUSTOMERNAME
+  3  NOT NULL
+  4  ;
+
+Table altered.
+
+SQL> DESC CUSTOMER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+
+
+
+
+
+
+
+SQL> ALTER TABLE CUSTOMER
+  2  ADD AGE NUMBER(3);
+
+Table altered.
+
+SQL> ALTER TABLE CUSTOMER
+  2  ADD PHONENO NUMBER(10);
+
+Table altered.
+
+SQL> ALTER TABLE CUSTOMER
+  2  RENAME TO CUST_TABLE;
+
+Table altered.
+
+SQL> DESC CUST_TABLE
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+
+SQL> Insert into customer values: (1000, ‘Allen’, ‘#115 Chicago’, ‘#115 Chicago’, ‘25, 7878776);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> Insert into CUST_TABLE values: (1000, ‘Allen’, ‘#115 Chicago’, ‘#115 Chicago’, 25, 7878776);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> DESC CUSTOMER
+ERROR:
+ORA-04043: object CUSTOMER does not exist
+
+
+SQL> DESC CUST_TABLE
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+SQL> INSERT INTO CUST_TABLE VALUES(1000,'ALLEN','#115 CHICAGO','#115 CHICAGO',25,7878776);
+
+1 row created.
+
+SQL> INSERT INTO CUST_TABLE VALUES(1001,'GEORGE','#116 FRANCE','#115 FRANCE',25,434524);
+
+1 row created.
+
+SQL> INSERT INTO CUST_TABLE VALUES(1002,'BECKER','#114 NYC','#114 NYC',45,431525);
+
+1 row created.
+
+SQL> ALTER TABLE CUST_TABLE
+  2  ADD PRIMARY  KEY(CUSTOMERID);
+
+Table altered.
+
+SQL> SELECT*FROM  CUST_TABLE
+  2  ;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                              AGE    PHONENO
+------------------------------ ---------- ----------
+      1000 ALLEN                          #115 CHICAGO
+#115 CHICAGO                           25    7878776
+
+      1001 GEORGE                         #116 FRANCE
+#115 FRANCE                            25     434524
+
+      1002 BECKER                         #114 NYC
+#114 NYC                               45     431525
+
+
+SQL> DESC CUST_TABLE
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+SQL> COMMIT
+  2  ;
+
+Commit complete.
+
+SQL> Insert into cust_table values (1003,' Nanapatekar',' #115 India',' #115 India' , 45, 431525);
+
+1 row created.
+
+SQL> select*from cust_table;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                              AGE    PHONENO
+------------------------------ ---------- ----------
+      1000 ALLEN                          #115 CHICAGO
+#115 CHICAGO                           25    7878776
+
+      1001 GEORGE                         #116 FRANCE
+#115 FRANCE                            25     434524
+
+      1002 BECKER                         #114 NYC
+#114 NYC                               45     431525
+
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                              AGE    PHONENO
+------------------------------ ---------- ----------
+      1003  Nanapatekar                    #115 India
+ #115 India                            45     431525
+
+
+SQL> TRUNCATE table cust_table;
+
+Table truncated.
+
+SQL> select*from cust_table;
+
+no rows selected
+
+
+SQL> Alter table cust_table  add e_mail varchar2(30);
+
+Table altered.
+
+SQL> desc cust_table
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+ E_MAIL                                             VARCHAR2(30)
+
+SQL> create table customermaster
+  2  ( customerid number (5) primary key,
+  3  customername varchar2(30) not null,
+  4  address1 varchar2(30),
+  5  address2 varchar2(30),
+  6  gender varchar2(1),
+  7  age number(3),
+  8  phoneno number(10)
+  9  )
+ 10  ;
+
+Table created.
+
+SQL> desc customermaster
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ GENDER                                             VARCHAR2(1)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+SQL> create table accountsmaster(
+  2  customerid number(5),
+  3  accountnumber  number(10) primary key,
+  4  accounttype varchar2(3),
+  5  ledgerbalance number(10,2) not null
+  6  );
+
+Table created.
+
+SQL> desc accountsmaster
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ ACCOUNTNUMBER                             NOT NULL NUMBER(10)
+ ACCOUNTTYPE                                        VARCHAR2(3)
+ LEDGERBALANCE                             NOT NULL NUMBER(10,2)
+
+SQL>
+
+SQL> desc customermaster
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ GENDER                                             VARCHAR2(1)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+SQL> insert into customermaster values(1000,'Allen','#115 Chicago','#115 Chicago','M',25, 7878776);
+
+1 row created.
+
+SQL> insert into customermaster values(1001,'George','#116 FRANCE','#116 FRANCE','M',25, 434524);
+
+1 row created.
+
+SQL> insert into customermaster values(1002,'BECKER','#114 NEW YORK','#114 NEWYORK','M',45, 431525);
+
+1 row created.
+
+SQL> SELECT*FROM CUSTOMERMASTER;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                       G        AGE    PHONENO
+------------------------------ - ---------- ----------
+      1000 Allen                          #115 Chicago
+#115 Chicago                   M         25    7878776
+
+      1001 George                         #116 FRANCE
+#116 FRANCE                    M         25     434524
+
+      1002 BECKER                         #114 NEW YORK
+#114 NEWYORK                   M         45     431525
+
+SQL> Alter table Accountsmaster ADD constraint ass_fk FOREIGN KEY(customerid) REFERENCES customermaster(customerid);
+
+Table altered.
+
+SQL> DESC ACCOUNTSMASTER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ ACCOUNTNUMBER                             NOT NULL NUMBER(10)
+ ACCOUNTTYPE                                        VARCHAR2(3)
+ LEDGERBALANCE                             NOT NULL NUMBER(10,2)
+
+
+SQL> alter table Accountsmaster add constraint ck_ac check(accounttype='NRI' or accounttype='IND');
+
+Table altered.
+
+ select*from customermaster;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                       G        AGE    PHONENO
+------------------------------ - ---------- ----------
+      1000 Allen                          #115 Chicago
+#115 Chicago                   M         25    7878776
+
+      1001 George                         #116 FRANCE
+#116 FRANCE                    M         25     434524
+
+      1002 BECKER                         #114 NEW YORK
+#114 NEWYORK                   M         45     431525
+
+
+SQL> Delete from customermaster where customerid = 1000;
+
+1 row deleted.
+
+SQL> select*from customermaster;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                       G        AGE    PHONENO
+------------------------------ - ---------- ----------
+      1001 George                         #116 FRANCE
+#116 FRANCE                    M         25     434524
+
+      1002 BECKER                         #114 NEW YORK
+#114 NEWYORK                   M         45     431525
+
+
+SQL> Create table accountdetails as select * from Accountsmaster;
+
+Table created.
+
+SQL> select*from accountdetails;
+
+no rows selected
+
+SQL> desc accountdetails
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                         NUMBER(5)
+ ACCOUNTNUMBER                                      NUMBER(10)
+ ACCOUNTTYPE                                        VARCHAR2(3)
+ LEDGERBALANCE                             NOT NULL NUMBER(10,2)
+
+SQL>CREATE VIEW Acc_view AS SELECT*from accountsmaster;
+
+View created.
+

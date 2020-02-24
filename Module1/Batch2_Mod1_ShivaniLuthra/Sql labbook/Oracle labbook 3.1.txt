@@ -1,0 +1,234 @@
+SQL> select s.staff_name, d.dept_code, d.dept_name,s.staff_sal from staff_master s, department_master d where s.dept_code=d.dept_code and staff_sal>20000;
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+tarun                                                       1
+enterprise                                           87220.17
+
+vinod                                                       2
+telecom                                              28922.11
+
+shwetha                                                     2
+telecom                                              85764.11
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+surbhi                                                      4
+marketing                                            56930.21
+
+ruchika                                                     4
+marketing                                               24000
+
+SQL> select s.staff_code as Staff#, s.staff_name as Staff, d.dept_name, s.mgr_code as Manager# from staff_master s, department_master d where s.dept_code= d.dept_code;
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MANAGER#
+-------------------------------------------------- ----------
+      1001 tarun
+enterprise                                                111
+
+      1007 riya
+telecom
+
+      1002 vinod
+telecom                                                   121
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MANAGER#
+-------------------------------------------------- ----------
+      1003 shwetha
+telecom                                                    11
+
+      1004 surbhi
+marketing                                                 123
+
+      1006 ruchika
+marketing                                                 112
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MANAGER#
+-------------------------------------------------- ----------
+      1008 dhriti_rao
+hr
+
+
+7 rows selected.
+
+SQL> select s.student_code, s.student_name, bt.book_code, b.book_name from student_master s, book_master b, book_transactions bt where s.student_code=bt.student_code and b.book_code=bt.book_code and bt.book_expected_return_date like to_char(sysdate,'DD-MON-YY');
+
+no rows selected
+
+
+SQL> select s.student_code, s.student_name, bt.book_code, b.book_name from student_master s, book_master b, book_transactions bt where s.student_code=bt.student_code and b.book_code=bt.book_code and bt.book_expected_return_date like to_char(sysdate+1,'DD-MON-YY');
+
+STUDENT_CODE STUDENT_NAME                                        BOOK_CODE
+------------ -------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+         101 roli                                                     1111
+see me
+
+
+SQL> select s.staff_code, s.staff_name, d.dept_name, dd.design_name,b.book_code, b.book_name, bb.book_issue_date from staff_master s join department_master d on s.dept_code=d.dept_code join designation_master dd on s.design_code=dd.design_code join book_transactions bb on s.staff_code= bb.staff_code join book_master b on b.book_code= bb.book_code where MONTHS_BETWEEN(sysdate,bb.book_issue_date)<1;
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+DESIGN_NAME                                         BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME                                          BOOK_ISSU
+-------------------------------------------------- ---------
+      1001 tarun
+enterprise
+Professor                                                1111
+see me                                             20-JAN-20
+
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+DESIGN_NAME                                         BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME                                          BOOK_ISSU
+-------------------------------------------------- ---------
+      1002 vinod
+telecom
+Manager                                                  1112
+fifty shades                                       12-FEB-20
+
+
+SQL> select s.staff_code, s.staff_name, dd.design_name, d.dept_name, b.book_code, b.book_name, b.book_pub_author,
+  2  5*((sysdate)-(bb.book_expected_return_date)) as fine
+  3  from staff_master s left outer join designation_master dd on s.design_code=dd.design_code
+  4  join book_transactions bb on s.staff_code= bb.staff_code
+  5  join department_master d on s.dept_code=d.dept_code
+  6  join book_master b on b.book_code= bb.book_code;
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+      1001 tarun
+Professor
+enterprise                                               1111
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+see me
+nicholas                                           -.45665509
+
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+      1002 vinod
+Manager
+telecom                                                  1112
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+fifty shades
+steve                                              -40.456655
+
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+      1004 surbhi
+AsstProfessor
+marketing                                                1113
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME
+--------------------------------------------------
+DEPT_NAME                                           BOOK_CODE
+-------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR                                          FINE
+-------------------------------------------------- ----------
+c++
+dev                                                204.543345
+
+SQL> select staff_code, staff_name, staff_sal from staff_master
+  2  where staff_sal<
+  3  (select avg(staff_sal) from staff_master);
+
+STAFF_CODE STAFF_NAME                                          STAFF_SAL
+---------- -------------------------------------------------- ----------
+      1006 ruchika                                                 24000
+      1007 riya                                                    12590
+      1008 dhriti_rao                                              12500
+      1002 vinod                                                28922.11
+
+SQL> select book_name, book_pub_author from book_master where book_pub_author in (select book_pub_author from book_master group by book_pub_author having count(book_pub_author)>1);
+
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+architecture
+dev
+
+c++
+dev
+
+c&java
+ramanujan
+
+
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+hardware
+ramanujan

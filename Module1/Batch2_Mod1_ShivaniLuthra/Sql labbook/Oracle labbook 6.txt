@@ -1,0 +1,62 @@
+SQL> desc customermaster
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(5)
+ CUSTOMERNAME                              NOT NULL VARCHAR2(30)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ GENDER                                             VARCHAR2(1)
+ AGE                                                NUMBER(3)
+ PHONENO                                            NUMBER(10)
+
+SQL>  insert into customermaster values (6003,'John','#114 Chicago','#114 Chicago', 'M', 45, 439525);
+
+1 row created.
+
+SQL>  insert into customermaster values (6001,'Jack', '#116 France', '#116 France', 'M', 25, 434524);
+
+1 row created.
+
+SQL>  insert into customermaster values (6002, 'James', '#114 New York', '#114 New York', 'M', 45, 431525);
+
+1 row created.
+
+SQL> select*from customermaster
+  2  ;
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                       G        AGE    PHONENO
+------------------------------ - ---------- ----------
+      1001 George                         #116 FRANCE
+#116 FRANCE                    M         25     434524
+
+      1002 BECKER                         #114 NEW YORK
+#114 NEWYORK                   M         45     431525
+
+      6003 John                           #114 Chicago
+#114 Chicago                   M         45     439525
+
+
+CUSTOMERID CUSTOMERNAME                   ADDRESS1
+---------- ------------------------------ ------------------------------
+ADDRESS2                       G        AGE    PHONENO
+------------------------------ - ---------- ----------
+      6001 Jack                           #116 France
+#116 France                    M         25     434524
+
+      6002 James                          #114 New York
+#114 New York                  M         45     431525
+SQL> savepoint p1;
+
+Savepoint created.
+
+SQL> savepoint SP1;
+
+Savepoint created.
+
+SQL>  insert into customermaster values (6003, 'John', '#114 Chicago', '#114 Chicago', 'M', 45, 439525);
+
+1 row created.
+
+SQL> rollback SP1;

@@ -1,0 +1,163 @@
+SQL> select staff_name, LPAD(staff_sal,15,'$') from Staff_Master;
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+tarun
+$$$$$$$87220.17
+
+vinod
+$$$$$$$28922.11
+
+shwetha
+$$$$$$$85764.11
+
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+surbhi
+$$$$$$$56930.21
+
+
+SQL> select student_name, to_char(student_dob,'MONTH, DD YYYY') from student_master where (to_char(student_dob,'DY')='SAT') or (to_char(student_dob,'DY')='SUN');
+
+STUDENT_NAME
+--------------------------------------------------
+TO_CHAR(STUDENT_DOB,'MONTH,DDYYYY')
+---------------------------------------------
+roli
+JANUARY  , 26 1997
+
+akash
+AUGUST   , 09 2020
+
+rashmi
+FEBRUARY , 01 1998
+
+
+STUDENT_NAME
+--------------------------------------------------
+TO_CHAR(STUDENT_DOB,'MONTH,DDYYYY')
+---------------------------------------------
+shubhangi
+DECEMBER , 27 1997
+
+manan
+MAY      , 13 2017
+
+
+SQL> select staff_name,hiredate,(to_char(sysdate,'yy')- (to_char(hiredate, 'yy')))*12 as Months_Worked from Staff_Master order by Months_Worked;
+
+STAFF_NAME                                         HIREDATE  MONTHS_WORKED
+-------------------------------------------------- --------- -------------
+vinod                                              25-DEC-28           -96
+shwetha                                            30-MAR-20             0
+surbhi                                             04-APR-12            96
+tarun                                              21-JUL-12            96
+
+SQL> select * from Staff_Master s where to_number(to_char(s.hiredate,'DD')) <=15 and to_char(hiredate,'MON')='DEC';
+
+no rows selected
+
+
+SQL> select * from Staff_Master s where to_number(to_char(s.hiredate,'DD')) >=15 and to_char(hiredate,'MON')='DEC';
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1002 vinod                                                        2
+         2 25-DEC-28 21-FEB-19
+ghaziabad
+       121   28922.11
+
+SQL> SELECT STAFF_NAME,STAFF_SAL ,
+  2  CASE
+  3  WHEN STAFF_SAL >=50000 THEN 'A'
+  4  WHEN STAFF_SAL  >25000 AND  STAFF_SAL<50000 THEN 'B'
+  5  WHEN STAFF_SAL  >10000 AND  STAFF_SAL<25000 THEN 'C'
+  6  ELSE 'D'
+  7  END CASE
+  8  from Staff_Master;
+
+STAFF_NAME                                          STAFF_SAL C
+-------------------------------------------------- ---------- -
+tarun                                                87220.17 A
+vinod                                                28922.11 B
+shwetha                                              85764.11 A
+surbhi                                               56930.21 A
+
+SQL> select staff_name, hiredate, to_char(hiredate,'DAY') as DAY from Staff_Master order by to_number(to_char(hiredate,'D'));
+
+STAFF_NAME                                         HIREDATE
+-------------------------------------------------- ---------
+DAY
+------------------------------------
+vinod                                              25-DEC-28
+MONDAY
+
+shwetha                                            30-MAR-20
+MONDAY
+
+surbhi                                             04-APR-12
+WEDNESDAY
+
+
+STAFF_NAME                                         HIREDATE
+-------------------------------------------------- ---------
+DAY
+------------------------------------
+tarun                                              21-JUL-12
+SATURDAY
+
+
+SQL> select INSTR('mississippi','i',1,3) from dual;
+
+INSTR('MISSISSIPPI','I',1,3)
+----------------------------
+                           8
+
+
+SQL> select to_char(next_day(last_day(sysdate)-7,'FRIDAY'),'Ddspth "of" Month, YYYY') as PAY_DATE from DUAL;
+
+PAY_DATE
+------------------------------------------------------------
+Twenty-Eighth of February , 2020
+
+SQL> select student_code, student_name, dept_code,
+  2  case when dept_code=2 then 'Electricals'
+  3  when dept_code=3 then 'Electronics'
+  4  else 'others'
+  5  end case
+  6  from Student_Master;
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+CASE
+-----------
+         101 roli                                                        1
+others
+
+         102 akash                                                       2
+Electricals
+
+         103 rashmi                                                      3
+Electronics
+
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+CASE
+-----------
+         104 shubhangi                                                   4
+others
+
+         105 manan                                                       4
+others
