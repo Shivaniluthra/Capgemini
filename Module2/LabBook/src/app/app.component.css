@@ -1,0 +1,20 @@
+div{
+    margin-left:40px;
+    margin-top: 30px;
+    color:gray;
+}
+#m{
+    margin-left: 40px;
+    color: black;
+}
+table{
+    margin: 40px;
+    color: grey;
+}
+thead{
+    color:black;
+}
+button{
+    color: gray;
+    border-radius: 5px;
+}

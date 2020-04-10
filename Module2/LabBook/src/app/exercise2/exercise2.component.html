@@ -1,0 +1,17 @@
+<table border="1">
+    <thead>Sorting By Header</thead>
+    <tr>
+        <th><a [routerLink]="" (click)='sortById()'>ID</a></th>
+        <th><a [routerLink]="" (click)='sortByName()'>Name</a></th>
+        <th><a [routerLink]=""  (click)='sortBySal()'>Salary</a></th>
+        <th><a [routerLink]="" (click)='sortByDep()'>Department</a></th>
+        <th>DOJ</th>
+    </tr>
+    <tr *ngFor="let e of emp">
+        <td>{{e.empId}}</td>
+        <td>{{e.empName}}</td>
+        <td>{{e.empSal}}</td>
+        <td>{{e.empDep}}</td>
+        <td>{{e.empjoiningdate}}</td>
+    </tr>
+</table>

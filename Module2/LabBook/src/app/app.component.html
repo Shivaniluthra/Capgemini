@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div>Angular 2 Operation</div>
+    <div>{{isAdded? "DATA Inserted": " "}}</div>
+    <div>{{isUpdated? "DATA updated": " "}}</div>
+    <div>{{isDeleted? "DATA deleted": " "}}</div>
+      <table>
+        <thead>ADD EMPLOYEE</thead><br>
+        <tr>
+          <td>
+            ID
+          </td>
+          <td>
+            <input type="text" #id>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            <input type="text" #name>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Salary
+          </td>
+          <td>
+            <input type="text" #salary> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Department
+          </td>
+          <td>
+            <input type="text"  #department>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button (click)='setData(id, name, salary,department)'>Add Employee</button>
+          </td>
+        </tr>
+      </table>
+     <div id="m"> Show All EMPLOYEE</div>
+      <table border="2">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Salary</th>
+          <th>Department</th>
+          <th colspan="2">ACTION</th>
+        </tr>
+        <tr *ngFor="let e of emp; let i=index">
+          <td>{{e.empId}}</td>
+          <td>{{e.empName}}</td>
+          <td>{{e.empSal}}</td>
+          <td>{{e.empDep}}</td>
+          <td><button (click)='upTab(i, e.empId, e.empName, e.empSal, e.empDep)'>UPDATE</button></td>
+          <td><button (click)='delTable(i)'>DELETE</button></td>
+        </tr>
+      </table>
+
+      <table *ngIf='updateTable'>
+        <thead>Update EMPLOYEE</thead><br>
+        <tr>
+          <td>
+            ID
+          </td>
+          <td>
+            <input type="text" value='{{empId}}' #id>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            <input type="text" value='{{empName}}' #name>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Salary
+          </td>
+          <td>
+            <input type="text" value='{{empSal}}' #salary> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Department
+          </td>
+          <td>
+            <input type="text" value='{{empDep}}' #department>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button (click)='upTable(id, name, salary,department)'>Update Employee</button>
+          </td>
+        </tr>
+      </table>
+      <app-exercise2></app-exercise2>
+      <br>
+      <br>
+      <app-exercise3></app-exercise3>
+      <br>
+      <br>
+      <app-exercise4></app-exercise4>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<table border="2" style="margin-left: 40px;">
+    <tr>
+        <th>Book ID</th>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>Book Year of Publish</th>
+    </tr>
+    <tr>
+        <td><input type="text" placeholder="id" [(ngModel)]="globalSearch"></td>
+        <td><input type="text" placeholder="title" [(ngModel)]="globalSearch"></td>
+        <td><input type="text" placeholder="year" [(ngModel)]="globalSearch.year"></td>
+        <td><input type="text" placeholder="author" [(ngModel)]="globalSearch.author"></td>
+    </tr>
+    <tr *ngFor="let b of books | filter:globalSearch">
+        <td>{{b.id}}</td>
+        <td>{{b.title}}</td>
+        <td>{{b.year}}</td>
+        <td>{{b.author}}</td>
+    </tr>
+</table>

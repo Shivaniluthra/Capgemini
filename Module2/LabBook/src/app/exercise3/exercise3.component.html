@@ -1,0 +1,45 @@
+<html>
+    <body>
+        <form [formGroup]='product' (ngSubmit)="submit()">
+        <table>
+            <tr>
+                <td>Product ID</td>
+                <td><input type="text" formControlName="prodId"></td>
+            </tr>
+            <div *ngIf="prodID.touched && prodID.invalid" class="alert alert-danger">Mendatory field</div>
+            <tr>
+                <td>Product Name</td>
+                <td><input type="text" formControlName="prodName"></td>
+            </tr>
+            <div *ngIf="prodNam.touched && prodNam.invalid" class="alert alert-danger">Mendatory field</div>
+            <tr>
+                <td>Product Cost</td>
+                <td><input type="number" formControlName="prodCost"></td>
+            </tr>
+            <div *ngIf="prodCo.touched && prodCo.invalid" class="alert alert-danger">Mendatory field</div>
+            <tr>
+                <td>Product Online</td>
+                <td><input type="radio" formControlName="prodOn" name="prodOn" value="Yes">Yes 
+                    <input type="radio" formControlName="prodOn" name="prodOn" value="No">No</td>
+            </tr>
+            <div *ngIf="prodOnl.touched && prodOnl.invalid" class="alert alert-danger">Mendatory field</div>
+            <tr>
+                <td>Product Category</td>
+                <td><select formControlName='prodCat'> 
+                    <option *ngFor="let cat of category; let i=index" (change)="getSelectedCategory()">{{cat}}
+                </select></td>
+            </tr>
+            <div *ngIf="prodCate.touched && prodCate.invalid" class="alert alert-danger">Mendatory field</div>
+            <tr>
+                <td>Avaialable in Store</td>
+                <td class="form-check-inline" *ngFor="let c of storesArray.controls; let i=index;">
+                    <input class="form-check-input" type="checkbox" [formControl]="c" id='inlineCheckbox{{i}}' (change)="getSelectedStores()">{{stores[i]}}
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Add Product" [disabled]='!product.valid'></td>
+            </tr>
+        </table>
+    </form>
+    </body>
+</html>
