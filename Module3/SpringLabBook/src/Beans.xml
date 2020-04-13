@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+  xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+    http://www.directwebremoting.org/schema/spring-dwr
+    http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+
+	<bean id="emp" class="Lab1_1.Employee">
+	<property name="employeeId" value="12345"/>
+	<property name="employeeName" value="Harriet"/>
+	<property name="salary" value="40000.00"/>
+	<property name="businessUnit" value="PES-BU"/>
+	<property name="age" value="30"/>
+	</bean>
+	<bean id="empl" class="Lab1_2.Employee" autowire="byName">
+	<property name="employeeId" value="12345"/>
+	<property name="employeeName" value="Harriet"/>
+	<property name="salary" value="40000.00"/>
+	<property name="age" value="30"/>
+<!--<property name="businessUnit" ref="sbu"/> -->
+	</bean>
+	<bean id="businessUnit" class="Lab1_2.SBU">
+	<property name="sbuId" value="PES-BU"/>
+	<property name="sbuHead" value="Kiran Rao"/>
+	<property name="sbuName" value="Product Engineering Services"/>
+	</bean>
+	<bean id="employee" class="Lab1_3.Employee">
+	<property name="employeeId" value="12345"/>
+	<property name="employeeName" value="Harriet"/>
+	<property name="salary" value="40000.00"/>
+	<property name="age" value="30"/>
+	<property name="businessUnit" ref="sbu1"/>
+	</bean>
+	<bean id="employee1" class="Lab1_3.Employee" autowire="byType">
+	<property name="employeeId" value="12346"/>
+	<property name="employeeName" value="Juliet"/>
+	<property name="salary" value="60000.00"/>
+	<property name="age" value="30"/>
+<!-- <property name="businessUnit" ref="sbu1"/> -->	
+	</bean>
+	<bean id="sbu1" class="Lab1_3.SBU">
+	<property name="sbuId" value="PES-BU"/>
+	<property name="sbuHead" value="Kiran Rao"/>
+	<property name="sbuName" value="Product Engineering Services"/>
+	<property name="empList">
+		<list>
+			<ref bean="employee"/>
+			<ref bean="employee1"/>
+		</list>
+	</property>
+	</bean>
+	<bean id="employee2" class="Lab1_4.Employee">
+	<property name="employeeId" value="12345"/>
+	<property name="employeeName" value="Harriet"/>
+	<property name="salary" value="40000.00"/>
+	<property name="age" value="30"/>
+	</bean>
+	<bean id="employee3" class="Lab1_4.Employee">
+	<property name="employeeId" value="12346"/>
+	<property name="employeeName" value="Juliet"/>
+	<property name="salary" value="60000.00"/>
+	<property name="age" value="30"/>
+	</bean>
+	<bean id="sbu2" class="Lab1_4.SBU">
+	<property name="sbuId" value="PES-BU"/>
+	<property name="sbuHead" value="Kiran Rao"/>
+	<property name="sbuName" value="Product Engineering Services"/>
+	<property name="empList">
+		<list>
+			<ref bean="employee2"/>
+			<ref bean="employee3"/>
+		</list>
+	</property>
+	</bean>
+	
+</beans>
